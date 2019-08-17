@@ -131,6 +131,7 @@
     ```
     
 - 힌트) 학생 A의 등수는 "A의 점수보다 높은 다른 사람들의 명 수 + 1" 이 됩니다.
+- 다 풀어보시고 numpy의 agrsort()함수를 찾아보세요
 
 
 ## 5. TF-IDF
@@ -283,4 +284,14 @@ def tf_idf(input_path):
         ???
     
     return tf_idf_dict
+```
+
+
+## 6. K-means clustering
+- k-means 알고리즘은 주어진 데이터를 k개의 cluster(group)로 묶는 알고리즘.
+- k-means 알고리즘의 목표는 각 데이터와 그 데이터가 포함된 클러스터의 중심과의 거리의 합이 최소화되는 것입니다.
+- [참고](https://ko.wikipedia.org/wiki/K-평균_알고리즘)
+- 다 풀어보시고 구글에 k-means 파이썬버전을 검색해보세요.
+- 다음과 같은 뼈대코드를 사용해도 됩니다.
+```python
 ```

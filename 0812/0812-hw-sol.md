@@ -1,3 +1,48 @@
+## 1. 함수 연습
+```python
+def get_1st_alpha(word):
+    return word[0]
+```
+
+## 2. dictionary 연습
+```python
+def classify_words(word_lst):
+    # Initialize a word dictionary, whose
+    #   - key: an alphabet
+    #   - val: list of words starting from the key
+    classifier = dict()
+
+    for word in word_lst:
+        alpahbet = word[0]
+        if alpahbet not in classifier:
+            classifier[alpahbet] = []
+        classifier[alpahbet].append(word)
+
+    # Retrun the dictionary
+    return classifier
+```
+
+## 3. Palindrome
+```python
+def is_palindrome(word):
+    alphabet_sequence = list(filter(str.isalpha, word.lower()))
+    n = len(alphabet_sequence)
+    
+    for i, alphabet in enumerate(alphabet_sequence):
+
+        # Check only half of the sequence
+        if i == int(n / 2):
+            break
+        
+        # Check if i-th word is matched with the last i-th word
+        i_th_word = alphabet
+        last_i_th_word = alphabet_sequence[n - i - 1]
+        print(i_th_word, last_i_th_word)
+        if i_th_word != last_i_th_word:
+            return False
+    return True
+```
+
 ## 5. TF-IDF
 ```python
 def tf_idf(input_path):

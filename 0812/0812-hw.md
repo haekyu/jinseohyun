@@ -293,5 +293,159 @@ def tf_idf(input_path):
 - [참고](https://ko.wikipedia.org/wiki/K-평균_알고리즘)
 - 다 풀어보시고 구글에 k-means 파이썬버전을 검색해보세요.
 - 다음과 같은 뼈대코드를 사용해도 됩니다.
+
 ```python
+import numpy as np
+
+def kmeans(data, k):
+    '''
+    k-means clustering
+    * input
+        - data: the data points(vectors), np.array
+        - k: the number of clusters
+    * output
+        - clusters: a dictionary, whose
+            - key: center index
+            - val: a list of data indices that belong to the cluster of the center (key)
+    '''
+    
+    # Randomly pick k cluster centers
+    centers = np.random.randint(?, ?, ?)
+    
+    # k-means iteration
+    while True:
+        
+        # Clustering the data based on centers
+        clusters = get_cluster(data, centers)
+
+        # Get new centers
+        new_centers = get_new_centers(clusters)
+
+        # Check if all of the centers stay the same
+        is_converged = centers_stayed(centers, new_centers)
+        if is_converged:
+            break
+            
+        # Update the center
+        centers = new_centers[:]
+        
+    clusters = get_cluster(data, centers)
+    return clusters
+    
+    
+def centers_stayed(centers, new_centers):
+    '''
+    If all points in centers and new_centers are the same, return True
+    The order of points in centers and new_centers could be different.
+    '''
+    
+    for c in centers:
+        if c not in new_centers:
+            return ?
+        
+    return ?
+
+
+def get_cluster(data, centers):
+    '''
+    Clusters the data for given centers
+    * input
+        - data: the data points(vectors), np.array
+        - centers: list of centers(indices)
+    * output
+        - clusters: a dictionary, whose
+            - key: center index
+            - val: a list of data indices that belong to the cluster of the center (key)
+    '''
+
+    # Initialize clusters
+    # clusters is a dictionary, whose
+    #   - key: a center index
+    #   - val: initially an empty list, but this will be 
+    #          a list of data indices that belong to the cluster of the center index (key)
+    clusters = {}
+    for c in centers:
+        clusters[c] = ?
+    
+    # For every data point, map the data into one of the center point
+    for data_idx, data_point in enumerate(data):
+        
+        center_for_this_data = 0
+        dist_bw_d_center = 100000
+        
+        # Find out the center that has the minimum distance with the current data
+        for center in centers:
+            # Get vector of the center
+            center_point = ?
+            
+            # Get squrare distance between data_point vector and center_point vector
+            square_distance = ?
+
+            # If we found out a better center,
+            # update center_for_this_data and dist_bw_d_center
+            if square_distance ? dist_bw_d_center:
+                center_for_this_data = center
+                dist_bw_d_center = square_distance
+                
+        # Add the data_idx into cluster of center_for_this_data
+        clusters[center_for_this_data].append(data_idx)
+    
+    return clusters
+    
+
+def get_new_centers(clusters):
+    '''
+    Get new centers in every clusters
+    * input
+        - clusters: a dictionary, whose
+            - key: center index
+            - val: a list of data indices that belong to the cluster of the center (key)
+    * output
+        - new_centers: list of centers(indices)
+    '''
+    
+    # Initialize new_centers
+    new_centers = []
+    
+    # For every cluster, get cluster center
+    for member_in_cluster in clusters.values():
+
+        min_sum_distance = 100000
+        center_of_cluster = 0
+
+        # Get a new center (center_of_cluster) in this cluster
+        for potential_center in member_in_cluster:
+
+            # Calculate the sum of distance
+            # between the potential center and other members in the clusters
+            sum_distance = 0
+            
+            for other_member in member_in_cluster:
+                
+                # Get vectors of center point and the other member
+                center_point = data[potential_center]
+                member_point = data[other_member]
+                
+                # Get distance and add up into sum_distance
+                distance = ?
+                sum_distance = ?
+
+            # If found out a better center, 
+            # update min_sum_distance and center_of_cluster
+            if sum_distance ? min_sum_distance:
+                center_of_cluster = ?
+                min_sum_distance = ?
+
+        # Add the new center (center_of_cluster) to new_centers
+        new_centers.append(?)
+        
+    return new_centers
+    
+data = np.array([[1, 2], [2, 3], [4, 1], [1, 2], [6, 6], [8, 1], [-9, -10], [-2, -3], [-2, -9], [-1, -3], [-2, -5], [-9, -3]])
+clusters = kmeans(data, 2)
+print(clusters)
+```
+출력 결과
+```
+{10: [6, 7, 8, 9, 10, 11], 2: [0, 1, 2, 3, 4, 5]}
 ```

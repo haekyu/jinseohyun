@@ -108,19 +108,18 @@
 ## 4. 함수 연습
 - rank 함수를 구현해 보세요.
     - **input**: 두 개의 list를 인풋으로 받습니다.
-        - names: 학생들의 이름을 보관하는 리스트입니다.
-        - scores: 각 학생들의 점수를 보관하는 리스트입니다. 모두 숫자입니다.
+        - scores: 점수들을 보관하는 리스트입니다. 모두 숫자입니다.
     - **output**: 
-        - 각 학생들의 등수를 순서대로 보관하는 리스트를 리턴합시다.
+        - 등수를 순서대로 보관하는 리스트를 리턴합시다.
 - 예) 우리가 구현하는 함수를 get_ranks 라고 가정.
     ```python
     name_lst = ['이', '얼', '산', '쓰', '우']
     score_lst = [30, 42, 51, 18, 23]
 
-    ranks = get_ranks(name_lst, score_lst)
-
-    for name, score, rank in zip(name_lst, score_lst, ranks):
-        print('{}번째 학생: 이름={}, 점수={}, 등수={}등'.format(name, score, rank))
+    ranks = get_ranks(score_lst)
+    print(ranks)
+    for i, (name, score, rank) in enumerate(zip(name_lst, score_lst, ranks)):
+        print('{}번째 학생: 이름={}, 점수={}, 등수={}등'.format(i, name, score, rank))
     ```
     출력 결과
     ```

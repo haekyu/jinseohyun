@@ -43,6 +43,19 @@ def is_palindrome(word):
     return True
 ```
 
+## 4. 함수 연습
+```python
+def get_ranks(scores):
+    ranks = []
+    for score in scores:
+        rank = 1
+        for score_cmp in scores:
+            if score < score_cmp:
+                rank = rank + 1
+        ranks.append(rank)
+    return ranks 
+```
+
 ## 5. TF-IDF
 ```python
 def tf_idf(input_path):
